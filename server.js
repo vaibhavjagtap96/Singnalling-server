@@ -4,7 +4,15 @@ import http from "http";
 import { Server } from "socket.io";
 
 const app = express();
-app.use(cors());
+
+// ✅ CORS for your deployed frontend only
+app.use(
+  cors({
+    origin: "https://zenchat-frontend10.onrender.com",
+    methods: ["GET", "POST"],
+  })
+);
+
 app.use(express.json());
 
 app.get("/", (_, res) => res.send("✅ Socket.IO Signaling Server Running"));
@@ -13,7 +21,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"], // your frontend origin
+    origin: "https://zenchat-frontend10.onrender.com",
     methods: ["GET", "POST"],
   },
 });
@@ -42,7 +50,7 @@ io.on("connection", (socket) => {
     if (offererSocketId) {
       io.to(offererSocketId).emit("answerResponse", offerObj);
     }
-    if (callback) callback([]); // prevent crash if callback not provided
+    if (callback) callback([]);
   });
 
   socket.on("sendIceCandidateToSignalingServer", (data) => {
