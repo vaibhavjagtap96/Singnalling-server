@@ -21,7 +21,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://zenchat-frontend10.onrender.com",
+    origin: "https://zenchat-frontend12.onrender.com",
     methods: ["GET", "POST"],
   },
 });
