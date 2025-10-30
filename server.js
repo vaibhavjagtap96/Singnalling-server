@@ -8,7 +8,7 @@ const app = express();
 // ✅ CORS for your deployed frontend only
 app.use(
   cors({
-    origin: "https://zenchat-frontend10.onrender.com",
+    origin: "https://zenchat-frontend12.onrender.com",
     methods: ["GET", "POST"],
   })
 );
